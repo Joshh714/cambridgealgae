@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Spirulina Grow Guide</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+  /* Layout: single centered reading column; figures set in mono; tinted blocks mark the two moments that matter — the spec strip and the community call. */
+  :root{
+    --bg:#ffffff;
+    --surface:#f4f5f2;
+    --soft:#e8f0ea;
+    --fg:#111411;
+    --muted:#55605a;
+    --brand:#0f3d2e;
+    --on-brand:#ffffff;
+    --line:#dde3dd;
+    --display:"Jost", system-ui, sans-serif;
+    --body:"IBM Plex Sans", system-ui, sans-serif;
+    --mono:"IBM Plex Mono", ui-monospace, monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#0d1411;
+      --surface:#141d18;
+      --soft:#16231c;
+      --fg:#e9efe9;
+      --muted:#9fb0a4;
+      --brand:#7fc7a1;
+      --on-brand:#0d1411;
+      --line:#23302a;
+      color-scheme:dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0d1411;
+    --surface:#141d18;
+    --soft:#16231c;
+    --fg:#e9efe9;
+    --muted:#9fb0a4;
+    --brand:#7fc7a1;
+    --on-brand:#0d1411;
+    --line:#23302a;
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box}
+  body{
+    background:var(--bg);
+    color:var(--fg);
+    font-family:var(--body);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{
+    max-width:760px;
+    margin-inline:auto;
+    padding-left:max(20px, env(safe-area-inset-left, 0px));
+    padding-right:max(20px, env(safe-area-inset-right, 0px));
+  }
+  a{color:var(--brand)}
+
+  /* Masthead */
+  header{border-bottom:1px solid var(--line)}
+  .mast{display:flex;align-items:center;gap:12px;padding-block:18px}
+  .mono-mark{
+    font-family:var(--display);font-weight:600;font-size:22px;letter-spacing:.02em;
+    color:var(--on-brand);background:var(--brand);
+    width:40px;height:40px;display:grid;place-items:center;border-radius:9px;
+  }
+  .mast .word{font-family:var(--display);letter-spacing:.28em;font-size:12px;font-weight:500;text-transform:uppercase;color:var(--muted)}
+  .mast .word b{display:block;color:var(--fg);font-weight:500}
+
+  /* Hero */
+  .hero{padding-block:40px 20px}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--brand);margin:0 0 14px}
+  h1{font-family:var(--display);font-weight:500;font-size:clamp(32px,7vw,46px);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;margin:0 0 16px}
+  .lede{font-size:clamp(17px,2.4vw,19px);color:var(--muted);max-width:60ch;margin:0}
+
+  /* Spec strip */
+  .spec{
+    list-style:none;margin:28px 0 0;padding:20px;
+    background:var(--soft);border-radius:14px;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:18px;
+  }
+  .spec li{min-width:0}
+  .spec .k{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+  .spec .v{font-family:var(--mono);font-weight:500;font-size:clamp(15px,2.3vw,18px);color:var(--fg)}
+  @media (max-width:520px){.spec{grid-template-columns:repeat(2,1fr)}}
+
+  /* Sections */
+  section{padding-block:34px;border-top:1px solid var(--line)}
+  section:first-of-type{border-top:0}
+  .sec-no{font-family:var(--mono);font-size:12px;color:var(--brand);letter-spacing:.1em}
+  h2{font-family:var(--display);font-weight:500;font-size:clamp(23px,4vw,29px);letter-spacing:-.01em;text-wrap:balance;margin:6px 0 14px}
+  p{margin:0 0 14px;max-width:65ch}
+  strong{font-weight:600}
+
+  /* Numbered steps */
+  ol.steps{list-style:none;counter-reset:s;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:16px}
+  ol.steps>li{counter-increment:s;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start}
+  ol.steps>li::before{
+    content:counter(s);font-family:var(--mono);font-weight:500;font-size:15px;
+    color:var(--brand);background:var(--soft);
+    width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+  }
+  ol.steps h3{font-family:var(--display);font-weight:500;font-size:18px;margin:4px 0 4px}
+  ol.steps p{margin:0;color:var(--muted)}
+
+  /* Plain lists */
+  ul.plain{margin:4px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px}
+  ul.plain li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:baseline}
+  ul.plain li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--brand);transform:translateY(7px)}
+  ul.plain li p{margin:0}
+
+  /* Troubleshooting */
+  .fix{display:flex;flex-direction:column;gap:2px;margin-top:6px}
+  .fix .row{padding:16px 0;border-bottom:1px solid var(--line)}
+  .fix .row:last-child{border-bottom:0}
+  .fix .q{font-family:var(--display);font-weight:500;font-size:17px;margin:0 0 4px}
+  .fix .a{margin:0;color:var(--muted)}
+
+  /* Cheat sheet */
+  .cheat{background:var(--surface);border-radius:14px;padding:22px;margin-top:6px}
+  .cheat ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+  .cheat li{display:flex;justify-content:space-between;gap:16px;font-family:var(--mono);font-size:14px;border-bottom:1px dashed var(--line);padding-bottom:10px}
+  .cheat li:last-child{border-bottom:0;padding-bottom:0}
+  .cheat .lab{color:var(--muted)}
+  .cheat .val{color:var(--fg);text-align:right}
+
+  /* Community CTA */
+  .cta{background:var(--brand);color:var(--on-brand);border-radius:16px;padding:28px;margin:36px 0 0;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
+  .cta h2{color:var(--on-brand);margin:0 0 8px}
+  .cta p{color:var(--on-brand);opacity:.9;margin:0;max-width:40ch}
+  .qr{width:120px;height:120px;border-radius:12px;background:var(--on-brand);color:var(--brand);display:grid;place-items:center;text-align:center;font-family:var(--mono);font-size:11px;line-height:1.3;padding:10px;opacity:.85}
+  @media (max-width:560px){.cta{grid-template-columns:1fr}.qr{justify-self:start}}
+
+  footer{border-top:1px solid var(--line);margin-top:40px;padding-block:28px 40px;color:var(--muted);font-size:14px}
+  footer .email{font-family:var(--mono);color:var(--fg);user-select:all}
+  .note{font-size:13px;color:var(--muted);font-style:normal;background:var(--surface);border-radius:10px;padding:12px 14px;margin-top:18px}
+</style>
+<style>html,body{margin:0}img{max-width:100%}</style>
+</head>
+<body>
+
+
+<header>
+  <div class="wrap mast">
+    <span class="mono-mark" aria-hidden="true">CA</span>
+    <span class="word">Cambridge<b>Algae</b></span>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Grow Guide</p>
+    <h1>Growing your live Spirulina</h1>
+    <p class="lede">You've got a living culture, not a dried powder. Treat it like a small, easy pet: keep it warm, bright and fed, and it will grow fresh spirulina for you for months. Here's everything from unboxing to your first harvest.</p>
+    <ul class="spec">
+      <li><p class="k">Warmth</p><p class="v">25&ndash;35 &deg;C</p></li>
+      <li><p class="k">Light</p><p class="v">4&ndash;6 h / day</p></li>
+      <li><p class="k">Water</p><p class="v">pH ~9&ndash;10</p></li>
+      <li><p class="k">First harvest</p><p class="v">~2&ndash;3 wks</p></li>
+    </ul>
+  </div>
+
+  <section>
+    <span class="sec-no">01</span>
+    <h2>What's in your pack</h2>
+    <p>Your Small Starter Pack has three things: a <strong>live, concentrated Spirulina culture</strong>, a sachet of <strong>dry nutrient</strong> that makes the special water spirulina lives in, and this guide. Spirulina (<em>Arthrospira platensis</em>) isn't a plant &mdash; it's a microscopic blue-green algae that floats in warm, mineral-rich, slightly alkaline water and multiplies in the light.</p>
+    <p>That's the whole idea: you'll mix the nutrient into clean water to make its home, pour in the living culture to seed it, and let it grow until it's dense enough to harvest.</p>
+  </section>
+
+  <section>
+    <span class="sec-no">02</span>
+    <h2>Set it up</h2>
+    <p>About ten minutes, best done the day it arrives. You'll need a clear glass or food-grade plastic container (a wide jar or small tank is ideal &mdash; more surface means more light and air).</p>
+    <ol class="steps">
+      <li>
+        <div>
+          <h3>Let it settle</h3>
+          <p>Stand the pouch upright and let it rest for about 30 minutes after the journey. Starting today? Keep it at room temperature. Not starting for a day or two? Pop it in the fridge until you're ready.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>Prepare the water</h3>
+          <p>Fill your container with <strong>dechlorinated or filtered water</strong> &mdash; chlorine from the tap harms the culture. Tap water left to stand overnight works perfectly. Room temperature, not cold.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>Add the nutrient</h3>
+          <p>Stir in the dry nutrient at the dose printed on your pack card. This turns plain water into the warm, alkaline, mineral home spirulina needs. Mix until it's dissolved.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>Pour in the culture</h3>
+          <p>Add your live concentrate and stir gently. It'll look thin and pale green at first &mdash; completely normal for a fresh start. It hasn't failed; it's just about to begin.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>Find its spot</h3>
+          <p>A warm, bright place out of harsh direct midday sun &mdash; a windowsill or near a grow light is perfect. Cover it <strong>loosely</strong>: it needs to breathe, so never seal it tight.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <span class="sec-no">03</span>
+    <h2>Daily care</h2>
+    <p>Barely a minute a day. The culture does the work; you just keep the conditions right.</p>
+    <ul class="plain">
+      <li><p><strong>Stir once or twice a day.</strong> Thirty seconds keeps the spirulina suspended and exchanging gas with the air, instead of settling at the bottom.</p></li>
+      <li><p><strong>Keep it warm and bright.</strong> Cooler or darker just means slower growth, not death &mdash; so don't panic if your room dips.</p></li>
+      <li><p><strong>Top up as it evaporates.</strong> Add a splash of dechlorinated water now and then to keep the level steady.</p></li>
+    </ul>
+  </section>
+
+  <section>
+    <span class="sec-no">04</span>
+    <h2>Watching it grow</h2>
+    <p>Over the first days to weeks it deepens from pale to rich green and gets harder to see through &mdash; that's the spirulina multiplying. Dip a clean teaspoon in: when you can only just make it out a few centimetres down, the culture is getting dense.</p>
+    <p>A <strong>healthy culture smells earthy and grassy</strong>, looks a fresh vivid green, and swirls smoothly when stirred. Your first proper harvest usually comes around <strong>two to three weeks</strong> in &mdash; sooner when it's warm and bright, later when it's cool.</p>
+  </section>
+
+  <section>
+    <span class="sec-no">05</span>
+    <h2>Harvesting</h2>
+    <p>When it's thick and deep green, you can take some.</p>
+    <ul class="plain">
+      <li><p>Pour a portion through a <strong>fine cloth or mesh</strong> (around 30&ndash;50 &micro;m). The green paste left behind is your fresh spirulina.</p></li>
+      <li><p>Rinse it lightly and use it the same day, or keep it in the fridge for <strong>2&ndash;3 days</strong>, or freeze it in small portions.</p></li>
+      <li><p><strong>Never harvest it all.</strong> Leave at least half the culture behind so it can regrow &mdash; this is the difference between a one-off and a supply that lasts.</p></li>
+    </ul>
+  </section>
+
+  <section>
+    <span class="sec-no">06</span>
+    <h2>Keeping it going</h2>
+    <p>After harvesting, pour the strained water back into the container, top it up with fresh dechlorinated water, and feed a little more nutrient (per your pack card) to replace what the crop took out. Then it's back to the simple rhythm: <strong>feed, light, warmth, stir.</strong></p>
+    <p>Kept this way, one culture lives and produces for months. You're not buying spirulina &mdash; you're keeping it.</p>
+  </section>
+
+  <section>
+    <span class="sec-no">07</span>
+    <h2>Troubleshooting</h2>
+    <div class="fix">
+      <div class="row">
+        <p class="q">Pale, or not thickening</p>
+        <p class="a">Almost always too cool or too dark. Move it somewhere warmer and brighter, keep feeding, and give it time &mdash; slow is normal, not a failure.</p>
+      </div>
+      <div class="row">
+        <p class="q">Going yellow or brown, or smelling bad</p>
+        <p class="a">The culture is stressed or crashing &mdash; usually too hot (above ~38 &deg;C), too little light, or overfed. Cool it down, dilute with fresh prepared water, and ease off the nutrient.</p>
+      </div>
+      <div class="row">
+        <p class="q">Clumping or settling at the bottom</p>
+        <p class="a">It wants more movement. Stir more often; a healthy culture stays suspended through the water.</p>
+      </div>
+      <div class="row">
+        <p class="q">A little foam or surface film</p>
+        <p class="a">Usually harmless. Skim it off and keep the water gently moving.</p>
+      </div>
+      <div class="row">
+        <p class="q">It looks still after shipping</p>
+        <p class="a">Give it a few warm, bright days before worrying. Cultures routinely bounce back from the quiet of the post.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <span class="sec-no">08</span>
+    <h2>Quick reference</h2>
+    <div class="cheat">
+      <ul>
+        <li><span class="lab">Warmth</span><span class="val">25&ndash;35 &deg;C &middot; keep 18&ndash;38 &deg;C</span></li>
+        <li><span class="lab">Light</span><span class="val">4&ndash;6 h bright / day</span></li>
+        <li><span class="lab">Water</span><span class="val">dechlorinated &middot; pH ~9&ndash;10</span></li>
+        <li><span class="lab">Stir</span><span class="val">1&ndash;2&times; daily</span></li>
+        <li><span class="lab">Harvest</span><span class="val">from ~2&ndash;3 wks &middot; 30&ndash;50 &micro;m cloth</span></li>
+        <li><span class="lab">Leave behind</span><span class="val">&ge; half, to regrow</span></li>
+      </ul>
+    </div>
+    <p class="note">Exact nutrient amounts and water volumes are on the card in your pack &mdash; follow those for the precise dose. The ranges here are the general targets a Spirulina culture likes.</p>
+  </section>
+
+  <div class="cta">
+    <div>
+      <h2>Growing is better together</h2>
+      <p>The Cambridge Algae town hall is a WhatsApp community of UK growers &mdash; grow tips, quick troubleshooting, and everyone's first-harvest wins. Bring your questions.</p>
+    </div>
+    <div class="qr" aria-label="WhatsApp QR placeholder">WhatsApp QR<br>coming soon</div>
+  </div>
+
+  <footer>
+    <p>Cambridge Algae &middot; live Spirulina, grown in Cambridge.<br>
+    Questions about your culture? <span class="email">hello@cambridgealgae.com</span></p>
+  </footer>
+</main>
+
+</body>
+</html>
