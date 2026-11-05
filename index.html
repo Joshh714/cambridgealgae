@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="claude:viewport-fit-sides" content="cover">
 <title>Cambridge Algae</title>
+<meta name="description" content="Live Spirulina, grown in Cambridge. Grow your own fresh superfood at home and join a community of UK growers.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
-  /* Layout: a quiet single-column community page; green marks the one job — joining the town hall. Placeholder blocks are labelled so nothing reads as finished before it is. */
   :root{
     --bg:#ffffff; --surface:#f4f5f2; --soft:#e8f0ea;
     --fg:#111411; --muted:#55605a; --brand:#0f3d2e; --on-brand:#ffffff;
-    --line:#dde3dd; --ph:#eef1ec; --ph-line:#cdd6ce;
+    --line:#dde3dd;
     --display:"Jost", system-ui, sans-serif;
     --body:"IBM Plex Sans", system-ui, sans-serif;
     --mono:"IBM Plex Mono", ui-monospace, monospace;
@@ -19,22 +19,22 @@
   @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
     --bg:#0d1411; --surface:#141d18; --soft:#16231c;
     --fg:#e9efe9; --muted:#9fb0a4; --brand:#7fc7a1; --on-brand:#0d1411;
-    --line:#23302a; --ph:#121b16; --ph-line:#2a3a30; color-scheme:dark;
+    --line:#23302a; color-scheme:dark;
   }}
   :root[data-theme="dark"]{
     --bg:#0d1411; --surface:#141d18; --soft:#16231c;
     --fg:#e9efe9; --muted:#9fb0a4; --brand:#7fc7a1; --on-brand:#0d1411;
-    --line:#23302a; --ph:#121b16; --ph-line:#2a3a30; color-scheme:dark;
+    --line:#23302a; color-scheme:dark;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  img{max-width:100%}
   .wrap{max-width:960px;margin-inline:auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
   a{color:var(--brand)}
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--body);font-weight:500;font-size:16px;text-decoration:none;border-radius:11px;padding:13px 22px;border:1.5px solid transparent;cursor:pointer}
   .btn-primary{background:var(--brand);color:var(--on-brand);border-color:var(--brand)}
   .btn-ghost{background:transparent;color:var(--brand);border-color:var(--brand)}
-  .ph-tag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);background:var(--ph);border:1px dashed var(--ph-line);border-radius:5px;padding:3px 7px}
 
   /* Masthead */
   header{border-bottom:1px solid var(--line)}
@@ -54,44 +54,49 @@
   p{margin:0 0 16px;max-width:60ch}
   .muted{color:var(--muted)}
 
+  /* Media (real photos) */
+  .media{border-radius:16px;overflow:hidden;background:var(--soft);border:1px solid var(--line);max-width:100%}
+  .media img{width:100%;height:100%;object-fit:cover;display:block}
+
   /* Hero */
   .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
   .hero .lede{font-size:clamp(17px,2.4vw,19px);color:var(--muted)}
   .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
-  .hero-img{aspect-ratio:4/3;border-radius:16px;background:var(--ph);border:1px dashed var(--ph-line);display:grid;place-items:center;text-align:center;color:var(--muted);font-family:var(--mono);font-size:13px;padding:16px;max-width:100%}
+  .hero-media{aspect-ratio:1/1}
   @media (max-width:720px){.hero{grid-template-columns:1fr;gap:28px}}
 
   /* Split rows (grow guide / shop) */
   .split{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
   @media (max-width:720px){.split{grid-template-columns:1fr;gap:24px}}
-  .pane{aspect-ratio:3/2;border-radius:16px;background:var(--ph);border:1px dashed var(--ph-line);display:grid;place-items:center;text-align:center;color:var(--muted);font-family:var(--mono);font-size:13px;padding:16px}
+  .pane{aspect-ratio:4/5}
 
   /* Join band */
   .join{background:var(--brand);color:var(--on-brand);border-radius:20px;padding:clamp(24px,4vw,40px);display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
   .join h2{color:var(--on-brand)}
   .join p{color:var(--on-brand);opacity:.92}
-  .join .steps{font-family:var(--mono);font-size:14px;line-height:1.9;opacity:.92;margin:4px 0 0}
-  .qr{width:168px;height:168px;border-radius:14px;background:var(--on-brand);color:var(--brand);display:grid;place-items:center;text-align:center;font-family:var(--mono);font-size:12px;line-height:1.4;padding:14px}
-  @media (max-width:640px){.join{grid-template-columns:1fr;gap:24px}}
+  .join .steps{font-family:var(--mono);font-size:14px;line-height:1.9;opacity:.92;margin:4px 0 18px}
+  .join .btn-light{background:var(--on-brand);color:var(--brand);border-color:var(--on-brand)}
+  .qr{width:176px;height:176px;border-radius:14px;background:#fff;padding:10px;display:block}
+  .qr img{width:100%;height:100%;object-fit:contain;display:block;border-radius:6px}
+  @media (max-width:640px){.join{grid-template-columns:1fr;gap:24px}.qr{margin-inline:auto}}
 
   /* Blog */
   .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:8px}
   @media (max-width:720px){.cards{grid-template-columns:1fr}}
-  .card{background:var(--surface);border-radius:14px;padding:20px;min-width:0}
-  .card .thumb{aspect-ratio:16/9;border-radius:9px;background:var(--ph);border:1px dashed var(--ph-line);display:grid;place-items:center;color:var(--muted);font-family:var(--mono);font-size:11px;margin-bottom:14px}
+  .card{background:var(--surface);border-radius:14px;padding:22px;min-width:0;border-top:3px solid var(--brand)}
+  .card .tag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
   .card h3{font-family:var(--display);font-weight:500;font-size:19px;margin:0 0 6px}
   .card p{font-size:15px;color:var(--muted);margin:0}
 
   .shop-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:4px}
 
   footer{border-top:1px solid var(--line);padding-block:32px 44px;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
-  footer .email{font-family:var(--mono);color:var(--fg);user-select:all}
+  footer .fcol b{display:block;color:var(--fg);font-weight:500;margin-bottom:4px}
+  footer .email{font-family:var(--mono);color:var(--fg)}
   footer a{color:var(--muted)}
 </style>
-<style>html,body{margin:0}img{max-width:100%}</style>
 </head>
 <body>
-
 
 <header>
   <div class="wrap mast">
@@ -99,7 +104,6 @@
     <span class="brandword">Cambridge<b>Algae</b></span>
     <nav>
       <a href="grow-guide.html">Grow Guide</a>
-      <a href="#blog">Blog</a>
       <a href="#shop">Shop</a>
       <a href="#join">Join</a>
     </nav>
@@ -111,19 +115,16 @@
   <section class="wrap">
     <div class="hero">
       <div>
-        <p class="eyebrow">Live Spirulina &middot; grown in Cambridge</p>
-        <h1>Grow your own fresh superfood.</h1>
-        <p class="lede">We grow live Spirulina in Cambridge and send it out alive, so you can grow it on at home. Join a community of UK growers, learn the ropes, and keep your culture thriving.</p>
+        <p class="eyebrow">Live culture &middot; ships UK-wide</p>
+        <h1>Live Spirulina,<br>grown in Cambridge.</h1>
+        <p class="lede">Grow your own fresh superfood at home. Join a community of growers helping each other get a thriving culture.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#join">Join the town hall</a>
+          <a class="btn btn-primary" href="#join">Join our WhatsApp</a>
           <a class="btn btn-ghost" href="#shop">Shop</a>
         </div>
       </div>
-      <div class="hero-img">
-        <div>
-          <span class="ph-tag">Placeholder</span><br><br>
-          Hero image<br>live Spirulina pouch
-        </div>
+      <div class="media hero-media">
+        <img src="microscope.jpg" alt="Live Spirulina filaments under the microscope" loading="eager" width="896" height="912">
       </div>
     </div>
   </section>
@@ -134,11 +135,11 @@
       <div>
         <p class="eyebrow">Grow Guide</p>
         <h2>New to growing? Start here.</h2>
-        <p class="muted">Step-by-step care for your live culture, from unboxing to your first harvest: set it up, feed it, keep it bright and warm, and harvest. Keeps your Spirulina thriving and your reviews happy.</p>
+        <p class="muted">Step-by-step care for your live culture: settle it in, feed it, keep it bright and warm, and harvest a little at a time. Keeps your Spirulina thriving &mdash; and your reviews happy.</p>
         <a class="btn btn-ghost" href="grow-guide.html">Read the grow guide</a>
       </div>
-      <div class="pane">
-        <div><span class="ph-tag">Placeholder</span><br><br>Grow steps image</div>
+      <div class="media pane">
+        <img src="product.jpg" alt="Cambridge Algae Spirulina Starter Pack: live culture pouch, dry nutrient and grow instructions" loading="lazy" width="896" height="1200">
       </div>
     </div>
   </section>
@@ -147,13 +148,14 @@
   <section class="wrap" id="join">
     <div class="join">
       <div>
-        <h2>The growers' town hall</h2>
-        <p>A WhatsApp community for everyone growing Cambridge Algae: an announcements channel for grow tips, plus a space to ask questions and show off your harvests.</p>
-        <p class="steps">How to join<br>1. Scan the QR, or tap the link on your phone<br>2. Tap Join Community<br>3. Say hello</p>
+        <h2>The Spiruliners WhatsApp</h2>
+        <p>A WhatsApp Community for everyone growing algae. An announcements channel for grow tips, plus a space to ask questions and show off your harvests.</p>
+        <p class="steps">How to join<br>1. Scan the QR, or tap the link on your phone<br>2. Tap Join Community<br>3. Say hello in the chat</p>
+        <a class="btn btn-light" href="https://wa.me/message/6636MZU2PFOUO1" target="_blank" rel="noopener">Join the community</a>
       </div>
-      <div class="qr">
-        <div><span class="ph-tag" style="color:var(--brand);background:transparent;border-color:var(--brand)">Placeholder</span><br><br>WhatsApp QR<br>&amp; join link<br>coming soon</div>
-      </div>
+      <a class="qr" href="https://wa.me/message/6636MZU2PFOUO1" target="_blank" rel="noopener" aria-label="Join the Cambridge Algae WhatsApp community">
+        <img src="whatsapp-qr.png" alt="WhatsApp QR code to join the Cambridge Algae growers community" width="542" height="571">
+      </a>
     </div>
   </section>
 
@@ -163,14 +165,14 @@
       <div>
         <p class="eyebrow">Shop</p>
         <h2>Get your starter pack</h2>
-        <p class="muted">The Live Spirulina Starter Pack: a concentrated live culture, dry nutrient, and grow instructions. Buy on our marketplace stores now; direct checkout is coming soon.</p>
+        <p class="muted">Live Spirulina Starter Pack: culture, nutrient and grow instructions. Buy on eBay now; direct checkout (Stripe) coming soon.</p>
         <div class="shop-actions">
-          <a class="btn btn-primary" href="https://www.ebay.co.uk/usr/cambridge_algae" target="_blank" rel="noopener">Shop on eBay</a>
-          <a class="btn btn-ghost" href="https://www.etsy.com/shop/CambridgeAlgae" target="_blank" rel="noopener">Shop on Etsy</a>
+          <a class="btn btn-primary" href="https://www.ebay.co.uk/usr/cambridge_algae" target="_blank" rel="noopener">Shop now on eBay</a>
+          <a class="btn btn-ghost" href="https://www.etsy.com/shop/CambridgeAlgae" target="_blank" rel="noopener">Etsy</a>
         </div>
       </div>
-      <div class="pane">
-        <div><span class="ph-tag">Placeholder</span><br><br>Product photo</div>
+      <div class="media pane">
+        <img src="product.jpg" alt="Cambridge Algae Spirulina Starter Pack" loading="lazy" width="896" height="1200">
       </div>
     </div>
   </section>
@@ -179,29 +181,33 @@
   <section class="wrap" id="blog">
     <p class="eyebrow">Blog</p>
     <h2>From the growroom</h2>
-    <p class="muted">Stories, tips and recipes that keep growers coming back. Launching soon with our first three posts.</p>
+    <p class="muted">Stories, tips and recipes that keep growers coming back. Launching with three posts.</p>
     <div class="cards">
       <article class="card">
-        <div class="thumb"><span class="ph-tag">Placeholder</span></div>
+        <span class="tag">Coming soon</span>
         <h3>Your first harvest</h3>
-        <p>When and how to scoop your first fresh Spirulina. Coming soon.</p>
+        <p>When and how to scoop your first fresh Spirulina.</p>
       </article>
       <article class="card">
-        <div class="thumb"><span class="ph-tag">Placeholder</span></div>
+        <span class="tag">Coming soon</span>
         <h3>Why did it go pale?</h3>
-        <p>Quick fixes for a struggling, fading culture. Coming soon.</p>
+        <p>Quick fixes for a struggling, fading culture.</p>
       </article>
       <article class="card">
-        <div class="thumb"><span class="ph-tag">Placeholder</span></div>
+        <span class="tag">Coming soon</span>
         <h3>3 ways to eat it</h3>
-        <p>Simple, tasty uses with no fishy aftertaste. Coming soon.</p>
+        <p>Higher in nutrients than dry, with no fishy aftertaste.</p>
       </article>
     </div>
   </section>
 
   <footer class="wrap">
-    <span>Cambridge Algae &middot; live Spirulina, grown in Cambridge.</span>
-    <span class="email">hello@cambridgealgae.com</span>
+    <span class="fcol">
+      <b>Cambridge Algae</b>
+      Live Spirulina, grown in Cambridge.<br>
+      Instagram &middot; YouTube &middot; <a class="email" href="mailto:joshua@cambridgealgae.com">joshua@cambridgealgae.com</a>
+    </span>
+    <span>&copy; Cambridge Algae</span>
   </footer>
 </main>
 
